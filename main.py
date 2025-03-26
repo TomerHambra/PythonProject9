@@ -15,7 +15,7 @@ except Exception as e:
 if di == {}:
     di['all'] = {'password': 'fklkjdlsk', 'name': 'all'}
     di = {"usernames": di}
-authenticator = stauth.Authenticate(di, 'cpwebsite', '12345', 0)
+authenticator = stauth.Authenticate(di, 'cpwebsite', '12345', 1)
 
 if 'reg' not in st.session_state:
     st.session_state['reg'] = 1
