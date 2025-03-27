@@ -25,11 +25,9 @@ if st.session_state['reg'] == 1:
         if st.button("Register"):
             st.session_state['reg'] = 0
             st.rerun()
-        print(stauth.Hasher.hash('Toto2000!'))
         authenticator.login('main', clear_on_submit=False)
         if st.session_state['authentication_status']:
             st.session_state['reg'] = 2
-            print(di)
             with open(file_path, 'wb') as f:
                 pickle.dump(di, f)
             st.rerun()
@@ -47,7 +45,7 @@ elif st.session_state['reg'] == 0:
             st.success('User registered successfully')
             st.session_state['reg'] = 2
             st.session_state['authentication_status'] = True
-            print(di)
+            st.session_state['username'] = username
             with open(file_path, 'wb') as f:
                 pickle.dump(di, f)
             st.rerun()
@@ -68,7 +66,19 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                This week we will be introducing the basics of competitive programming.
                Here are some questions to get you started:
                """)
-        st.link_button("Question 1", 'https://cses.fi/problemset/task/1068')
-        st.link_button("Question 2", 'https://cses.fi/problemset/task/1069')
-        st.link_button("Question 3", 'https://cses.fi/problemset/task/1070')
-        st.link_button("Question 4", 'https://cses.fi/problemset/task/1071')
+        lc, rc = st.columns(2)
+        with lc:
+            st.link_button("Question 1", 'https://cses.fi/problemset/task/1068')
+            st.link_button("Question 2", 'https://cses.fi/problemset/task/1069')
+            st.link_button("Question 3", 'https://cses.fi/problemset/task/1070')
+            st.link_button("Question 4", 'https://cses.fi/problemset/task/1071')
+        with rc:
+            st.write('Here you can mark the questions you have completed (they will be saved on your next visit):')
+            p = [st.checkbox(f"Finished Question {i+1}", key=i, value=di['usernames'][st.session_state.get('username')].get(str(i), 0)) for i in range(4)]
+            for i in range(4):
+                di['usernames'][st.session_state.get('username')][str(i)] = p[i]
+            sum = p.count(True)
+            with open(file_path, 'wb') as f:
+                pickle.dump(di, f)
+
+        st.subheader(f'So far you have completed {sum}/{len(p)} questions')
