@@ -4,6 +4,7 @@ from pathlib import Path
 import streamlit_authenticator as stauth
 import parser
 from parser import Status
+import update_db
 
 st.set_page_config(page_title="Competitive Programming At University of Haifa", page_icon=":shark:", layout="wide")
 
@@ -52,6 +53,7 @@ elif st.session_state['reg'] == 0:
             st.session_state['username'] = username
             with open(file_path, 'wb') as f:
                 pickle.dump(di, f)
+            update_db.update(file_path)
             st.rerun()
     except Exception as e:
         st.error(e)
@@ -64,6 +66,7 @@ elif st.session_state['reg'] == 3:
         di['usernames'][st.session_state.get('username')]['cses_handle'] = cses_handle
         with open(file_path, 'wb') as f:
             pickle.dump(di, f)
+        update_db.update(file_path)
         submitted = st.form_submit_button('Submit')
         if cses_username and cses_handle and submitted:
             st.session_state['reg'] = 2
@@ -107,6 +110,7 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
             su = p.count(Status.AC)
             with open(file_path, 'wb') as f:
                 pickle.dump(di, f)
+            update_db.update(file_path)
         if su == len(p):
             st.subheader('More challenging problems unlocked!')
             lc, rc = st.columns(2)
@@ -126,6 +130,7 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                 su += p.count(Status.AC)
                 with open(file_path, 'wb') as f:
                     pickle.dump(di, f)
+                update_db.update(file_path)
             if su == off+len(p):
                 st.success('Congrats! That is all for this week!')
             st.subheader(f'So far you have completed {su}/{off+len(p)} problems')

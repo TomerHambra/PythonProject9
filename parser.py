@@ -26,7 +26,7 @@ def get_user_info(user_id):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'Referer': LOGIN_URL
     }
-    request2 = client.post(LOGIN_URL, data={'csrf_token': csrf, 'nick': 'tomerh1307', 'pass': 'tomer1307'}, headers=headers)
+    request2 = client.post(LOGIN_URL, data={'csrf_token': csrf, 'nick': 'subclient', 'pass': 'Toto2000!'}, headers=headers)
     # print(request2.text)
     url = BASE_URL + user_id
     req = client.get(url)
