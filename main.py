@@ -4,6 +4,7 @@ from pathlib import Path
 import streamlit_authenticator as stauth
 import parser
 from parser import Status
+import json
 
 st.set_page_config(page_title="Competitive Programming At University of Haifa", page_icon=":shark:", layout="wide")
 
@@ -73,6 +74,9 @@ elif st.session_state['reg'] == 3:
 if st.session_state.get('authentication_status') and st.session_state.get('reg') == 2:
     with st.container():
         authenticator.logout('Logout', 'sidebar')
+        if st.session_state.get('username') == 'tomer1307':
+            if st.button('Print DB'):
+                print(json.dumps(di))
         st.title("Competitive Programming At University of Haifa")
         st.write("Welcome to the Competitive Programming At University of Haifa website!")
         st.write("This website is designed to help students learn and practice competitive programming.")

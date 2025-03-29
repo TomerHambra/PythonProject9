@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-from enum import Enum
+from enum import IntEnum
 
 
-class Status(Enum):
+class Status(IntEnum):
     AC = 0
     AT = 1
     NAT = 2
