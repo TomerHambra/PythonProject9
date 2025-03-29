@@ -90,19 +90,19 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                """)
         lc, rc = st.columns(2)
         su = 0
-        l = [1068, 1069, 1070, 1071]
+        l = [1085, 1645, 1631, 1662]
         with lc:
             k = [st.link_button(f"Problem {i + 1}", f'https://cses.fi/problemset/task/{tid}') for i, tid in enumerate(l)]
             st.text('Finish these problems to unlock more challenging ones!')
             # print(tasks)
         with rc:
-            st.write('Here you can see the problems you have not completed yet:')
+            st.write('Here you can see the status of your problems:')
             k = [st.badge(f'Problem {i + 1}', icon=":material/check:", color="green") if tasks[tid] == Status.AC
                  else st.badge(f'Problem {i + 1}', color='gray') if tasks[tid] == Status.NAT else
                  st.badge(f'Problem {i + 1}', icon=":material/close:", color="red")
                  for i, tid in enumerate(l)]
             p = [tasks[tid] for tid in l]
-            for i in range(4):
+            for i in range(len(l)):
                 di['usernames'][st.session_state.get('username')][str(i)] = p[i]
             su = p.count(Status.AC)
             with open(file_path, 'wb') as f:
@@ -110,8 +110,8 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
         if su == len(p):
             st.subheader('More challenging problems unlocked!')
             lc, rc = st.columns(2)
-            l2 = [1069, 1070]
-            off = 4
+            l2 = [2422]
+            off = len(l)
             with lc:
                 k = [st.link_button(f"Problem {i + 1 + off}", f'https://cses.fi/problemset/task/{tid}') for i, tid in enumerate(l2)]
             with rc:
@@ -121,8 +121,8 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                       st.badge(f'Problem {i + off+1}', icon=":material/close:", color="red")
                       for i, tid in enumerate(l2)]
                 p = [tasks[tid] for tid in l2]
-                for i in range(2):
-                    di['usernames'][st.session_state.get('username')][str(i + 4)] = p[i]
+                for i in range(len(l2)):
+                    di['usernames'][st.session_state.get('username')][str(i + off)] = p[i]
                 su += p.count(Status.AC)
                 with open(file_path, 'wb') as f:
                     pickle.dump(di, f)
