@@ -4,7 +4,6 @@ from pathlib import Path
 import streamlit_authenticator as stauth
 import parser
 from parser import Status
-# import update_db
 
 st.set_page_config(page_title="Competitive Programming At University of Haifa", page_icon=":shark:", layout="wide")
 
