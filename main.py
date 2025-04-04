@@ -87,7 +87,8 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                 user = st.text_input('cpuser:', key='cp')
                 k = st.form_submit_button('cpusersub')
                 if k:
-                    st.session_state['username'] = user
+                    if user in di['usernames']:
+                        st.session_state['username'] = user
         st.title("Competitive Programming At University of Haifa")
         st.write("Welcome to the Competitive Programming At University of Haifa website!")
         st.write("This website is designed to help students learn and practice competitive programming.")
