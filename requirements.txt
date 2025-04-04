@@ -1,3 +1,4 @@
 streamlit-authenticator
 bs4
 lxml
+python-pptx

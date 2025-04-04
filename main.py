@@ -5,6 +5,8 @@ import streamlit_authenticator as stauth
 import parser
 from parser import Status
 import json
+from pptx import Presentation
+from io import BytesIO
 
 st.set_page_config(page_title="Competitive Programming At University of Haifa", page_icon=":shark:", layout="wide")
 
@@ -89,6 +91,11 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
         tasks = parser.get_user_info(cses_handle)
         st.write("---")
         st.header("Week One - Introduction to Competitive Programming")
+        st.write("Here is the presentation for this week:")
+        pr = Presentation('presentations/week1.pptx')
+        bo = BytesIO()
+        pr.save(bo)
+        st.download_button(label='Week 1 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-1.pptx')
         st.write("""
                This week we will be introducing the basics of competitive programming.
                Here are some problems to get you started:
