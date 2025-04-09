@@ -3,7 +3,7 @@ from pathlib import Path
 import pickle
 
 
-admins = ['tomer1307', 'yarinys']
+admins = ['tomer1307', 'yarinys', 'all']
 def update_scores(di, amtofq = st.session_state.get('amtofq',0)):
     lis = []
     users = di['usernames']
@@ -41,5 +41,15 @@ df = {}
 for i, stri in enumerate(categories):
     df[stri] = [x[i] for x in sorted_list]
 st.table(df)
+
+
+st.subheader('Problem Scoring Method')
+st.write("""
+        The way this works is each problem has a difficulty rating via stars, and for each problem with  $x$  stars you get
+        a score of $(x+1)^2$. Additionally, the tiebreaker between two contestants is firstly their etgar year (as 
+        it is simply more impressive to solve the same amount of questions but a year less into the degree), and 
+        secondly their time of solving the last problem. 
+        """)
+
 with open(dist_file_path, 'wb') as f:
     pickle.dump(di, f)
