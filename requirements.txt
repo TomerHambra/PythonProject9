@@ -2,3 +2,4 @@ streamlit-authenticator
 bs4
 lxml
 python-pptx
+st-star-rating
