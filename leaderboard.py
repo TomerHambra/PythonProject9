@@ -3,7 +3,7 @@ from pathlib import Path
 import pickle
 
 
-admins = ['tomer1307', 'yarinys', 'all']
+admins = ['tomer1307', 'yarinys', 'all', 'omer1308', 'yaser2408']
 def update_scores(di, amtofq = st.session_state.get('amtofq',0)):
     lis = []
     users = di['usernames']
@@ -31,7 +31,7 @@ with open(dist_file_path, 'rb') as f:
 stars = st.session_state.get('stars', [])
 unsorted_list = update_scores(di)
 sorted_list = sorted(unsorted_list, key=lambda x: (x[1], 100 if type(x[-1]) == type('') else x[-1]), reverse=True)
-coding = ['rainbow', 'red', 'blue']
+coding = ['red', 'orange', 'blue']
 for i, user in enumerate(sorted_list):
     if i < 3:
         sorted_list[i][0] = f":{coding[i]}[{user[0]}]"
@@ -40,6 +40,7 @@ categories = ['Username', 'Total Score'] + [f'Problem {i+1}' for i in range(st.s
 df = {}
 for i, stri in enumerate(categories):
     df[stri] = [x[i] for x in sorted_list]
+print(df)
 st.table(df)
 
 
