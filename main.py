@@ -178,6 +178,6 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                    Here are some problems to get you started:
                    """)
             week(l, l2, stars, tasks)
-    pg = st.navigation([homepage, 'leaderboard.py'])
+    pg = st.navigation([homepage, 'leaderboard.py', 'profile.py'])
     pg.run()
 
