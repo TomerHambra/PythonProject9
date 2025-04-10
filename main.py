@@ -139,17 +139,8 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
 
 if st.session_state.get('authentication_status') and st.session_state.get('reg') == 2:
     with st.container():
-
         authenticator.logout('Logout', 'sidebar')
-        if st.session_state.get('username') == 'tomer1307':
-            if st.button('Print DB'):
-                st.json(di)
-            with st.form('cpuser'):
-                user = st.text_input('cpuser:', key='cp')
-                k = st.form_submit_button('cpusersub')
-                if k:
-                    if user in di['usernames']:
-                        st.session_state['username'] = user
+
 
     def homepage():
         with st.container():

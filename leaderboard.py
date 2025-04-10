@@ -3,7 +3,7 @@ from pathlib import Path
 import pickle
 import data
 
-admins = ['tomer1307', 'yarinys', 'all', 'omer1308', 'yaser2408']
+admins = data.admins
 def update_scores(di, amtofq = len(data.stars)):
     lis = []
     users = di['usernames']

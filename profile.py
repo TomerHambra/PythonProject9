@@ -1,11 +1,29 @@
 import streamlit as st
 from pathlib import Path
 import pickle
+import data
 
 file_path = Path(__file__).parent / 'hashed_pw.pkl'
 
 with open(file_path, 'rb') as f:
     di = pickle.load(f)
+
+if st.session_state.get('username') in data.admins:
+    if st.button('Print DB'):
+        st.json(di)
+    with st.form('copy user'):
+        user = st.text_input('copy user:', key='cp')
+        k = st.form_submit_button('submit')
+        if k:
+            if user in di['usernames']:
+                st.session_state['username'] = user
+                st.rerun()
+    with st.form('fetch user'):
+        user = st.text_input('fetch user:', key='fetch')
+        k = st.form_submit_button('submit')
+        if k:
+            if user in di['usernames']:
+                st.table(di['usernames'][user])
 
 if st.button('Change CSES info'):
     st.session_state['profcses'] = 1

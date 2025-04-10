@@ -11,3 +11,4 @@ week2l = [1076, 1077]
 
 stars = week1s + week2s
 
+admins = ['tomer1307', 'yarinys', 'all', 'omer1308', 'yaser2408']
