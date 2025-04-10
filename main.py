@@ -8,6 +8,7 @@ import json
 from pptx import Presentation
 from io import BytesIO
 from streamlit_star_rating import st_star_rating
+from data import *
 
 st.set_page_config(page_title="Competitive Programming At University of Haifa", page_icon=":shark:", layout="wide")
 
@@ -81,7 +82,7 @@ elif st.session_state['reg'] == 3:
             st.rerun()
 
 
-def week(list_of_questions, list_of_locked, stars, tasks):
+def week(list_of_questions, list_of_locked, stars, tasks, totoff):
     global di
     su = 0
     l = list_of_questions
@@ -89,20 +90,20 @@ def week(list_of_questions, list_of_locked, stars, tasks):
     lc, mc, rc = st.columns(3)
     stars_size = 20
     with lc:
-        k = [st.link_button(f"Problem {i + 1}", f'https://cses.fi/problemset/task/{tid}') for i, tid in enumerate(l)]
+        k = [st.link_button(f"Problem {totoff + i + 1}", f'https://cses.fi/problemset/task/{tid}') for i, tid in enumerate(l)]
         st.text('Finish these problems to unlock more challenging ones!')
         # print(tasks)
     with mc:
-        k = [st_star_rating("", 5,stars[i], stars_size, read_only=True,dark_theme=True, key=f's{i}') for i, tid in enumerate(l)]
+        k = [st_star_rating("", 5,stars[i], stars_size, read_only=True,dark_theme=True, key=f's{totoff+i}') for i, tid in enumerate(l)]
     with rc:
         st.write('Here you can see the status of your problems:')
-        k = [st.badge(f'Problem {i + 1}', icon=":material/check:", color="green") if tasks[tid] == Status.AC
-             else st.badge(f'Problem {i + 1}', color='gray') if tasks[tid] == Status.NAT else
-        st.badge(f'Problem {i + 1}', icon=":material/close:", color="red")
+        k = [st.badge(f'Problem {totoff + i + 1}', icon=":material/check:", color="green") if tasks[tid] == Status.AC
+             else st.badge(f'Problem {totoff + i + 1}', color='gray') if tasks[tid] == Status.NAT else
+        st.badge(f'Problem {totoff + i + 1}', icon=":material/close:", color="red")
              for i, tid in enumerate(l)]
         p = [tasks[tid] for tid in l]
         for i in range(len(l)):
-            di['usernames'][st.session_state.get('username')][str(i)] = p[i]
+            di['usernames'][st.session_state.get('username')][str(totoff + i)] = p[i]
         su = p.count(Status.AC)
         with open(file_path, 'wb') as f:
             pickle.dump(di, f)
@@ -111,29 +112,29 @@ def week(list_of_questions, list_of_locked, stars, tasks):
         lc, mc, rc = st.columns(3)
         off = len(l)
         with lc:
-            k = [st.link_button(f"Problem {i + 1 + off}", f'https://cses.fi/problemset/task/{tid}') for i, tid in
+            k = [st.link_button(f"Problem {totoff + i + 1 + off}", f'https://cses.fi/problemset/task/{tid}') for i, tid in
                  enumerate(l2)]
         with mc:
             k = [st_star_rating("", 5, stars[i+off], stars_size, read_only=True, dark_theme=True,
-                                key=f's{i+off}') for i, tid in enumerate(l2)]
+                                key=f's{totoff + i+off}') for i, tid in enumerate(l2)]
         with rc:
             # st.write('Here you can mark the problems you have completed (they will be saved on your next visit):')
-            k2 = [st.badge(f'Problem {i + off + 1}', icon=":material/check:", color="green") if tasks[tid] == Status.AC
-                  else st.badge(f'Problem {i + off + 1}', color='gray') if tasks[tid] == Status.NAT else
-            st.badge(f'Problem {i + off + 1}', icon=":material/close:", color="red")
+            k2 = [st.badge(f'Problem {totoff + i + off + 1}', icon=":material/check:", color="green") if tasks[tid] == Status.AC
+                  else st.badge(f'Problem {totoff + i + off + 1}', color='gray') if tasks[tid] == Status.NAT else
+            st.badge(f'Problem {totoff + i + off + 1}', icon=":material/close:", color="red")
                   for i, tid in enumerate(l2)]
             p = [tasks[tid] for tid in l2]
             for i in range(len(l2)):
-                di['usernames'][st.session_state.get('username')][str(i + off)] = p[i]
+                di['usernames'][st.session_state.get('username')][str(totoff + i + off)] = p[i]
             su += p.count(Status.AC)
             with open(file_path, 'wb') as f:
                 pickle.dump(di, f)
         if su == off + len(p):
             st.success('Congrats! That is all for this week!')
-        st.subheader(f'So far you have completed {su}/{off + len(p)} problems')
+        st.subheader(f'So far you have completed {su}/{off + len(p)} problems this week!')
     else:
-        st.subheader(f'So far you have completed {su}/{len(p)} problems')
-    return su, p
+        st.subheader(f'So far you have completed {su}/{len(p)} problems this week!')
+    return totoff + len(stars)
 
 
 if st.session_state.get('authentication_status') and st.session_state.get('reg') == 2:
@@ -149,11 +150,7 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                 if k:
                     if user in di['usernames']:
                         st.session_state['username'] = user
-    stars = [1, 0, 0, 0, 1]
-    st.session_state['stars'] = stars
-    l = [1085, 1645, 1631, 1662]
-    l2 = [2422]
-    st.session_state['amtofq'] = len(stars)
+
     def homepage():
         with st.container():
             st.title("Competitive Programming At University of Haifa")
@@ -177,7 +174,27 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                    This week we will be introducing the basics of competitive programming.
                    Here are some problems to get you started:
                    """)
-            week(l, l2, stars, tasks)
+            new_off = week(week1u, week1l, week1s, tasks, 0)
+
+        with st.container():
+            if not st.session_state.get('authentication_status'):
+                st.rerun()
+            cses_handle = di['usernames'][st.session_state.get('username')].get('cses_handle')
+            # print(cses_handle)
+            tasks = parser.get_user_info(cses_handle)
+            st.write("---")
+            st.header("Week Two - Basic Data Structures")
+            st.write("Tomorrow a presentation will be available...")
+            # st.write("Here is the presentation for this week:")
+            # pr = Presentation('presentations/week1.pptx')
+            # bo = BytesIO()
+            # pr.save(bo)
+            # st.download_button(label='Week 1 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-1.pptx')
+            st.write("""
+                   This week we attempt to teach you about data structures that are used in c++ and competitive programming.
+                   Here are some problems to get you started:
+                   """)
+            new_off = week(week2u, week2l, week2s, tasks, new_off)
     pg = st.navigation([homepage, 'leaderboard.py', 'profile.py'])
     pg.run()
 

@@ -1,10 +1,10 @@
 import streamlit as st
 from pathlib import Path
 import pickle
-
+import data
 
 admins = ['tomer1307', 'yarinys', 'all', 'omer1308', 'yaser2408']
-def update_scores(di, amtofq = st.session_state.get('amtofq',0)):
+def update_scores(di, amtofq = len(data.stars)):
     lis = []
     users = di['usernames']
     for user in users:
@@ -28,7 +28,7 @@ dist_file_path = Path(__file__).parent / 'hashed_pw.pkl'
 with open(dist_file_path, 'rb') as f:
     di = pickle.load(f)
 
-stars = st.session_state.get('stars', [])
+stars = data.stars
 unsorted_list = update_scores(di)
 sorted_list = sorted(unsorted_list, key=lambda x: (x[1], 100 if type(x[-1]) == type('') else x[-1]), reverse=True)
 coding = ['red', 'orange', 'blue']
@@ -36,7 +36,7 @@ for i, user in enumerate(sorted_list):
     if i < 3:
         sorted_list[i][0] = f":{coding[i]}[{user[0]}]"
     sorted_list[i][1] = f"**{sorted_list[i][1]}**"
-categories = ['Username', 'Total Score'] + [f'Problem {i+1}' for i in range(st.session_state['amtofq'])] + ['Etgar']
+categories = ['Username', 'Total Score'] + [f'Problem {i+1}' for i in range(len(stars))] + ['Etgar']
 df = {}
 for i, stri in enumerate(categories):
     df[stri] = [x[i] for x in sorted_list]

@@ -1,6 +1,7 @@
 import json
 import pickle
 from pathlib import Path
+from data import stars
 
 src_file_path = Path(__file__).parent / 'db.json'
 dist_file_path = Path(__file__).parent / 'hashed_pw.pkl'
@@ -8,7 +9,6 @@ dist_file_path = Path(__file__).parent / 'hashed_pw.pkl'
 with open(src_file_path) as f:
     di = json.load(f)
 
-stars = [1,0,0,0,1]
 users = di['usernames']
 for user in users:
     su = 0
