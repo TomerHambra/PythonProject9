@@ -176,11 +176,13 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
             st.write("---")
             st.header("Week Two - Basic Data Structures")
             st.write("Tomorrow a presentation will be available...")
-            # st.write("Here is the presentation for this week:")
-            # pr = Presentation('presentations/week1.pptx')
-            # bo = BytesIO()
-            # pr.save(bo)
-            # st.download_button(label='Week 1 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-1.pptx')
+            st.write("Here is the presentation for this week:")
+
+            pr = Presentation('presentations/week2-19.pptx') if di['usernames'][st.session_state.get('username')].get('etgar') == '19' \
+                else Presentation('presentations/week2-18.pptx')
+            bo = BytesIO()
+            pr.save(bo)
+            st.download_button(label='Week 2 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-2.pptx')
             st.write("""
                    This week we attempt to teach you about data structures that are used in c++ and competitive programming.
                    Here are some problems to get you started:
