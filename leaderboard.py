@@ -10,6 +10,8 @@ def update_scores(di, amtofq = len(data.stars)):
     lis = []
     users = di['usernames']
     for user in users:
+        if user in data.black:
+            continue
         su = 0
         l2 = [user, users[user]['etgar']]
         for i in range(amtofq):
@@ -40,10 +42,10 @@ with lc:
     if not admin:
         sorted_list = [x for x in sorted_list if not x[-1]]
 for i, user in enumerate(sorted_list):
-    if i < 3:
-        sorted_list[i][0] = f":{coding[i]}[{user[0]}]"
     if user[0] in admins:
-        sorted_list[i][1] = f":rainbow[{user[1]}]"
+        sorted_list[i][0] = f":rainbow[{user[0]}]"
+    elif i < 3:
+        sorted_list[i][0] = f":{coding[i]}[{user[0]}]"
     sorted_list[i][1] = f"**{sorted_list[i][1]}**"
 # df = []
 # for i, stri in enumerate(categories):
