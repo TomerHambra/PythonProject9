@@ -24,6 +24,7 @@ def update_scores(di, amtofq = len(data.stars)):
 
 
 dist_file_path = Path(__file__).parent / 'hashed_pw.pkl'
+lc, mc, rc = st.columns(3)
 
 with open(dist_file_path, 'rb') as f:
     di = pickle.load(f)
@@ -32,22 +33,21 @@ stars = data.stars
 unsorted_list = update_scores(di)
 sorted_list = sorted(unsorted_list, key=lambda x: (x[1], x[-1], 100 if type(x[-1]) == type('') else x[-2]), reverse=True)
 coding = ['red', 'orange', 'blue']
+categories = ['Username', 'Total Score'] + [f'Problem {i+1}' for i in range(len(stars))] + ['Etgar', 'Admin']
+st.header('Filtering options:')
+with lc:
+    admin = st.checkbox('Show Admins', value=False)
+    if not admin:
+        sorted_list = [x for x in sorted_list if not x[-1]]
 for i, user in enumerate(sorted_list):
     if i < 3:
         sorted_list[i][0] = f":{coding[i]}[{user[0]}]"
     sorted_list[i][1] = f"**{sorted_list[i][1]}**"
-categories = ['Username', 'Total Score'] + [f'Problem {i+1}' for i in range(len(stars))] + ['Etgar', 'Admin']
 # df = []
 # for i, stri in enumerate(categories):
 #     df.append([x[i] for x in sorted_list])
 # print(df)
 df = pd.DataFrame.from_records(sorted_list, columns=categories)
-lc, mc, rc = st.columns(3)
-st.header('Filtering options:')
-with lc:
-    admin = st.checkbox('Show Admins', value=False)
-    if not admin:
-        df.drop(df[df['Admin'] == 1].index, inplace=True)
 with mc:
     et18 = st.checkbox('Show etgar 18', value=True)
     if not et18:
