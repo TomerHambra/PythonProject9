@@ -176,13 +176,18 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
             st.write("---")
             st.header("Week Two - Basic Data Structures")
             st.write("Tomorrow a presentation will be available...")
-            st.write("Here is the presentation for this week:")
-
-            pr = Presentation('presentations/week2-19.pptx') if di['usernames'][st.session_state.get('username')].get('etgar') == '19' \
-                else Presentation('presentations/week2-18.pptx')
-            bo = BytesIO()
-            pr.save(bo)
-            st.download_button(label='Week 2 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-2.pptx')
+            lc, rc = st.columns(2)
+            with lc:
+                st.write("Here is the presentation for this week:")
+                pr = Presentation('presentations/week2-19.pptx') if di['usernames'][st.session_state.get('username')].get('etgar') == '19' \
+                    else Presentation('presentations/week2-18.pptx')
+                bo = BytesIO()
+                pr.save(bo)
+                st.download_button(label='Week 2 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-2.pptx')
+            with rc:
+                st.write("Here is the recording from this week (notice that it may be partial during to technical difficulties):")
+                st.page_link('https://drive.google.com/file/d/16UVeVeJU4kw3UeJgp_52zh8SKfWt5oC-/view?usp=sharing',
+                             label='Recording Drive Link', icon='🇬🇬')
             st.write("""
                    This week we attempt to teach you about data structures that are used in c++ and competitive programming.
                    Here are some problems to get you started:
