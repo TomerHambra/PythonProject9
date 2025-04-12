@@ -42,6 +42,8 @@ with lc:
 for i, user in enumerate(sorted_list):
     if i < 3:
         sorted_list[i][0] = f":{coding[i]}[{user[0]}]"
+    if user[0] in admins:
+        sorted_list[i][1] = f":rainbow[{user[1]}]"
     sorted_list[i][1] = f"**{sorted_list[i][1]}**"
 # df = []
 # for i, stri in enumerate(categories):
