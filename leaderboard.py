@@ -26,6 +26,7 @@ def update_scores(di, amtofq = len(data.stars)):
 
 
 dist_file_path = Path(__file__).parent / 'hashed_pw.pkl'
+st.header('Filtering options:')
 lc, mc, rc = st.columns(3)
 
 with open(dist_file_path, 'rb') as f:
@@ -36,7 +37,6 @@ unsorted_list = update_scores(di)
 sorted_list = sorted(unsorted_list, key=lambda x: (x[1], x[-1], 100 if type(x[-1]) == type('') else x[-2]), reverse=True)
 coding = ['red', 'orange', 'blue']
 categories = ['Username', 'Total Score'] + [f'Problem {i+1}' for i in range(len(stars))] + ['Etgar', 'Admin']
-st.header('Filtering options:')
 with lc:
     admin = st.checkbox('Show Admins', value=False)
     if not admin:

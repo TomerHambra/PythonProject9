@@ -25,7 +25,7 @@ if st.session_state.get('username') in data.admins:
             if user in di['usernames']:
                 st.table(di['usernames'][user])
 
-if st.button('Change CSES info'):
+if st.button('Change CSES and Etgar info'):
     st.session_state['profcses'] = 1
 if st.session_state.get('profcses', 0) == 1:
     with st.form('cses_info'):
@@ -36,8 +36,6 @@ if st.session_state.get('profcses', 0) == 1:
                                   key='etgar')
         submitted = st.form_submit_button('Submit')
         if cses_username and cses_handle and submitted and etgar_num:
-            st.session_state['reg'] = 2
-            st.success('New Info Saved!')
             st.session_state['profcses'] = 0
             di['usernames'][st.session_state.get('username')]['cses_handle'] = cses_handle
             di['usernames'][st.session_state.get('username')]['etgar'] = etgar_num
@@ -45,5 +43,19 @@ if st.session_state.get('profcses', 0) == 1:
 
             with open(file_path, 'wb') as f:
                 pickle.dump(di, f)
+            st.success('New Info Saved!')
 
+if st.button('Change Codeforces info'):
+    st.session_state['profcf'] = 1
+if st.session_state.get('profcf', 0) == 1:
+    with st.form('cf_info'):
+        cf_handle = st.text_input('Codeforces Handle (Go to your profile, it\'s the numbers in the URL!)',
+                                    key='cf_handle')
+        submitted = st.form_submit_button('Submit')
+        if cf_handle and submitted:
+            st.session_state['profcf'] = 0
+            di['usernames'][st.session_state.get('username')]['cf_handle'] = cf_handle
 
+            with open(file_path, 'wb') as f:
+                pickle.dump(di, f)
+            st.success('New Info Saved!')
