@@ -49,7 +49,7 @@ if st.button('Change Codeforces info'):
     st.session_state['profcf'] = 1
 if st.session_state.get('profcf', 0) == 1:
     with st.form('cf_info'):
-        cf_handle = st.text_input('Codeforces Handle (Go to your profile, it\'s the numbers in the URL!)',
+        cf_handle = st.text_input('Codeforces Handle (Go to your profile, it\'s the username at codeforces)',
                                     key='cf_handle')
         submitted = st.form_submit_button('Submit')
         if cf_handle and submitted:
