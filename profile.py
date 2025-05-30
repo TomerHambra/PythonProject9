@@ -2,11 +2,10 @@ import streamlit as st
 from pathlib import Path
 import pickle
 import data
+import db_handler
 
-file_path = Path(__file__).parent / 'hashed_pw.pkl'
 
-with open(file_path, 'rb') as f:
-    di = pickle.load(f)
+di = db_handler.load_db()
 
 if st.session_state.get('username') in data.admins:
     if st.button('Print DB'):
@@ -41,8 +40,7 @@ if st.session_state.get('profcses', 0) == 1:
             di['usernames'][st.session_state.get('username')]['etgar'] = etgar_num
             di['usernames'][st.session_state.get('username')]['cses_username'] = cses_username
 
-            with open(file_path, 'wb') as f:
-                pickle.dump(di, f)
+            db_handler.save_db(di)
             st.success('New Info Saved!')
 
 if st.button('Change Codeforces info'):
@@ -56,6 +54,5 @@ if st.session_state.get('profcf', 0) == 1:
             st.session_state['profcf'] = 0
             di['usernames'][st.session_state.get('username')]['cf_handle'] = cf_handle
 
-            with open(file_path, 'wb') as f:
-                pickle.dump(di, f)
+            db_handler.save_db(di)
             st.success('New Info Saved!')

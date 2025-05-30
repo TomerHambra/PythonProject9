@@ -2,6 +2,7 @@ import streamlit as st
 from pathlib import Path
 import pickle
 import pandas as pd
+import db_handler
 
 import data
 
@@ -29,8 +30,7 @@ dist_file_path = Path(__file__).parent / 'hashed_pw.pkl'
 st.header('Filtering options:')
 lc, mc, rc = st.columns(3)
 
-with open(dist_file_path, 'rb') as f:
-    di = pickle.load(f)
+di = db_handler.load_db()
 
 stars = data.stars
 unsorted_list = update_scores(di)
@@ -76,5 +76,4 @@ st.write("""
         secondly their time of solving the last problem. 
         """)
 
-with open(dist_file_path, 'wb') as f:
-    pickle.dump(di, f)
+db_handler.save_db(di)

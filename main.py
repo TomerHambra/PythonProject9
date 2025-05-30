@@ -10,21 +10,13 @@ from io import BytesIO
 from streamlit_star_rating import st_star_rating
 from data import *
 from codeforces_parser import fetch_user
+import db_handler
 
 st.set_page_config(page_title="Competitive Programming At University of Haifa", page_icon=":shark:", layout="wide")
 
 
-di = {}
-file_path = Path(__file__).parent / 'hashed_pw.pkl'
-try:
-    with open(file_path, 'rb') as f:
-        di = pickle.load(f)
-except Exception as e:
-    pass
-    # st.error(e)
-if di == {}:
-    di['all'] = {'password': 'fklkjdlsk', 'name': 'all'}
-    di = {"usernames": di}
+di = db_handler.load_db()
+
 authenticator = stauth.Authenticate(di, 'cpwebsite', '12345', 3)
 
 if 'reg' not in st.session_state:
@@ -38,8 +30,7 @@ if st.session_state['reg'] == 1:
         authenticator.login('main', clear_on_submit=False)
         if st.session_state['authentication_status']:
             st.session_state['reg'] = 2
-            with open(file_path, 'wb') as f:
-                pickle.dump(di, f)
+            db_handler.save_db(di)
             st.rerun()
     except Exception as e:
         st.error(e)
@@ -58,8 +49,7 @@ elif st.session_state['reg'] == 0:
             st.session_state['authentication_status'] = True
             st.session_state['username'] = username
             di['usernames'][username]['score'] = 0
-            with open(file_path, 'wb') as f:
-                pickle.dump(di, f)
+            db_handler.save_db(di)
 
             st.rerun()
     except Exception as e:
@@ -75,8 +65,7 @@ elif st.session_state['reg'] == 3:
                                     key='etgar')
         di['usernames'][st.session_state.get('username')]['etgar'] = etgar_num
 
-        with open(file_path, 'wb') as f:
-            pickle.dump(di, f)
+        db_handler.save_db(di)
         submitted = st.form_submit_button('Submit')
         if cses_username and cses_handle and submitted and etgar_num:
             st.session_state['reg'] = 2
@@ -109,8 +98,7 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
         for i in range(len(l)):
             di['usernames'][st.session_state.get('username')][str(totoff + i)] = p[i]
         su = p.count(Status.AC)
-        with open(file_path, 'wb') as f:
-            pickle.dump(di, f)
+        db_handler.save_db(di)
     if su == len(p):
         st.subheader('More challenging problems unlocked!')
         lc, mc, rc = st.columns(3)
@@ -130,8 +118,7 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
             for i in range(len(l2)):
                 di['usernames'][st.session_state.get('username')][str(totoff + i + off)] = p[i]
             su += p.count(Status.AC)
-            with open(file_path, 'wb') as f:
-                pickle.dump(di, f)
+            db_handler.save_db(di)
         if su == off + len(p):
             st.success('Congrats! That is all for this week!')
         st.subheader(f'So far you have completed {su}/{off + len(p)} problems this week!')
