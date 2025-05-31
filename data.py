@@ -48,8 +48,21 @@ week3l = [[
 ]]
 
 
+week4s = []
+week4u = [
+    ['1635s', 'https://cses.fi/problemset/task/1635', 's'],
+    ['1158s', 'https://cses.fi/problemset/task/1158', 's'],
+    ['3403s', 'https://cses.fi/problemset/task/3403', 's'],
+    ['1636s', 'https://cses.fi/problemset/task/1636', 's'],
+    ['1140s', 'https://cses.fi/problemset/task/1140', 's'],
+]
+week4l = [
+    ['2413s', 'https://cses.fi/problemset/task/2413', 's'],
+    ['1145s', 'https://cses.fi/problemset/task/1145', 's'],
+]
 
-stars = week1s + week2s +week3s
+
+stars = week1s + week2s + week3s + week4s
 total_cf = ['2042C', '2013D', '2103C', '2096B']
 admins = ['tomer1307', 'yarinys']
 black = ['all', 'omer1308', 'yaser2408']
