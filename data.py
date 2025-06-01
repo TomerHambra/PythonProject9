@@ -48,7 +48,7 @@ week3l = [[
 ]]
 
 
-week4s = []
+week4s = [0, 0, 0, 0, 0, 1, 2]
 week4u = [
     ['1635s', 'https://cses.fi/problemset/task/1635', 's'],
     ['1158s', 'https://cses.fi/problemset/task/1158', 's'],

@@ -196,7 +196,6 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
             if di['usernames'][st.session_state.get('username')].get('etgar') == '18':
                 st.write("---")
                 st.header("Week Three - Greedy (and Graphs later)")
-                st.write("Sometimes a presentation will be available...")
                 lc, rc = st.columns(2)
                 with lc:
                     pr = Presentation('presentations/week3-19.pptx')
@@ -214,13 +213,12 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                 #     # st.page_link('https://drive.google.com/file/d/16UVeVeJU4kw3UeJgp_52zh8SKfWt5oC-/view?usp=sharing',
                 #     #              label='Recording Drive Link', icon='🇬🇬')
                 st.write("""
-                       This week we tried to demonstrate the basics of the greedy approach.
+                       This week we tried to demonstrate the basics of the greedy approach (which is most of it), and then added the basics of graphs.
                        """)
                 new_off = week(week3u[1], week3l[1], week3s, tasks, new_off)
             else:
                 st.write("---")
                 st.header("Week Three - Greedy")
-                st.write("Sometimes a presentation will be available...")
                 lc, rc = st.columns(2)
                 with lc:
                     st.write("Here is the presentation for this week:")
@@ -235,7 +233,7 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                 #     # st.page_link('https://drive.google.com/file/d/16UVeVeJU4kw3UeJgp_52zh8SKfWt5oC-/view?usp=sharing',
                 #     #              label='Recording Drive Link', icon='🇬🇬')
                 st.write("""
-                       This week we tried to demonstrate the basics of the greedy approach.
+                       This week we tried to demonstrate the basics of the greedy approach (which is most of it).
                        """)
                 new_off = week(week3u[0], week3l[0], week3s, tasks, new_off)
 
@@ -248,7 +246,7 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                 pr = Presentation('presentations/week4.pptx')
                 bo = BytesIO()
                 pr.save(bo)
-                st.download_button(label='Week 4 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-4.pptx', key='cpw21819')
+                st.download_button(label='Week 4 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-4.pptx', key='cpw41819')
             with rc:
                 pass
                 # st.write("Here is the recording from this week (notice that it may be partial during to technical difficulties):")
