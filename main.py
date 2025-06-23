@@ -30,7 +30,6 @@ if st.session_state['reg'] == 1:
         authenticator.login('main', clear_on_submit=False)
         if st.session_state['authentication_status']:
             st.session_state['reg'] = 2
-            db_handler.save_db(di)
             st.rerun()
     except Exception as e:
         st.error(e)
@@ -65,10 +64,11 @@ elif st.session_state['reg'] == 3:
                                     key='etgar')
         di['usernames'][st.session_state.get('username')]['etgar'] = etgar_num
 
-        db_handler.save_db(di)
+
         submitted = st.form_submit_button('Submit')
         if cses_username and cses_handle and submitted and etgar_num:
             st.session_state['reg'] = 2
+            # db_handler.save_db(di)
             st.rerun()
 
 
@@ -98,7 +98,7 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
         for i in range(len(l)):
             di['usernames'][st.session_state.get('username')][str(totoff + i)] = p[i]
         su = p.count(Status.AC)
-        db_handler.save_db(di)
+        # db_handler.save_db(di)
     if su == len(p):
         st.subheader('More challenging problems unlocked!')
         lc, mc, rc = st.columns(3)
@@ -118,7 +118,7 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
             for i in range(len(l2)):
                 di['usernames'][st.session_state.get('username')][str(totoff + i + off)] = p[i]
             su += p.count(Status.AC)
-            db_handler.save_db(di)
+            # db_handler.save_db(di)
         if su == off + len(p):
             st.success('Congrats! That is all for this week!')
         st.subheader(f'So far you have completed {su}/{off + len(p)} problems this week!')

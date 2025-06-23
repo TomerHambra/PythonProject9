@@ -24,11 +24,11 @@ def fetch_user(list_of_ids, handle):
         if ids in list_of_ids:
             ver = result.get('verdict', '')
             condensed[ids] = Status.AC if ver == 'OK' else Status.NAT if not ver else Status.AT
-    print(condensed)
+    # print(condensed)
     for id in list_of_ids:
         if id not in condensed:
             condensed[id] = Status.NAT
-    print(condensed)
+    # print(condensed)
     return condensed
 
 
