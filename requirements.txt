@@ -4,4 +4,4 @@ lxml
 python-pptx
 st-star-rating
 pyodbc
-mysql-connector-python
+pymysql
