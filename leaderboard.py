@@ -14,7 +14,7 @@ def update_scores(di, amtofq = len(data.stars)):
         if user in data.black:
             continue
         su = 0
-        l2 = [user, users[user]['etgar']]
+        l2 = [user, users[user].get('etgar', '20')]
         for i in range(amtofq):
             su += (stars[i] + 1) * (stars[i] + 1) if users[user].get(f"{i}", 2) == 0 else 0
             l2.append('✅' if users[user].get(f"{i}", 2) == 0 else '❌' if users[user].get(f"{i}", 2) == 1 else '\\-')
