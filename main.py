@@ -258,6 +258,8 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                    """)
             new_off = week(week4u, week4l, week4s, tasks, new_off)
 
+        db_handler.save_db(di)
+
     pg = st.navigation([homepage, 'leaderboard.py', 'profile.py'])
     pg.run()
 
