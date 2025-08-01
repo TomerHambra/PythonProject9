@@ -91,10 +91,10 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
     with rc:
         st.write('Here you can see the status of your problems:')
         k = [st.badge(f'Problem {totoff + i + 1}', icon=":material/check:", color="green") if tasks[tid] == Status.AC
-             else st.badge(f'Problem {totoff + i + 1}', color='gray') if tasks[tid] == Status.NAT else
+             else st.badge(f'Problem {totoff + i + 1}', color='gray') if tasks.get(tid, Status.NAT) == Status.NAT else
         st.badge(f'Problem {totoff + i + 1}', icon=":material/close:", color="red")
              for i, (tid, link, md) in enumerate(l)]
-        p = [tasks[tid] for (tid, link, md) in l]
+        p = [tasks.get(tid, Status.NAT) for (tid, link, md) in l]
         for i in range(len(l)):
             di['usernames'][st.session_state.get('username')][str(totoff + i)] = p[i]
         su = p.count(Status.AC)
@@ -110,11 +110,11 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
                                 key=f's{totoff + i+off}') for i, (tid, link, md) in enumerate(l2)]
         with rc:
             # st.write('Here you can mark the problems you have completed (they will be saved on your next visit):')
-            k2 = [st.badge(f'Problem {totoff + i + off + 1}', icon=":material/check:", color="green") if tasks[tid] == Status.AC
-                  else st.badge(f'Problem {totoff + i + off + 1}', color='gray') if tasks[tid] == Status.NAT else
+            k2 = [st.badge(f'Problem {totoff + i + off + 1}', icon=":material/check:", color="green") if tasks.get(tid, Status.NAT) == Status.AC
+                  else st.badge(f'Problem {totoff + i + off + 1}', color='gray') if tasks.get(tid, Status.NAT) == Status.NAT else
             st.badge(f'Problem {totoff + i + off + 1}', icon=":material/close:", color="red")
                   for i, (tid, link, md) in enumerate(l2)]
-            p = [tasks[tid] for (tid, link, md) in l2]
+            p = [tasks.get(tid, Status.NAT) for (tid, link, md) in l2]
             for i in range(len(l2)):
                 di['usernames'][st.session_state.get('username')][str(totoff + i + off)] = p[i]
             su += p.count(Status.AC)
