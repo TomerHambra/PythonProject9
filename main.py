@@ -197,7 +197,7 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                     Kosaraju’s or Tarjan’s algorithm to find strongly connected components (SCCs).
                     These topics are essential for tackling harder graph problems in competitions.
             """)
-            new_off = week(week2u, week2l, week2s, tasks, new_off)
+            new_off = week(week3u, week3l, week3s, tasks, new_off)
 
 
         db_handler.save_db(di)
