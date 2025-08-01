@@ -90,7 +90,7 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
                             dark_theme=True, key=f's{totoff+i}') for i, (tid, link, md) in enumerate(l)]
     with rc:
         st.write('Here you can see the status of your problems:')
-        k = [st.badge(f'Problem {totoff + i + 1}', icon=":material/check:", color="green") if tasks[tid] == Status.AC
+        k = [st.badge(f'Problem {totoff + i + 1}', icon=":material/check:", color="green") if tasks.get(tid, Status.NAT) == Status.AC
              else st.badge(f'Problem {totoff + i + 1}', color='gray') if tasks.get(tid, Status.NAT) == Status.NAT else
         st.badge(f'Problem {totoff + i + 1}', icon=":material/close:", color="red")
              for i, (tid, link, md) in enumerate(l)]
