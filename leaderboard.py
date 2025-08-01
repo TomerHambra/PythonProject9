@@ -35,7 +35,7 @@ stars = data.stars
 unsorted_list = update_scores(di)
 sorted_list = sorted(unsorted_list, key=lambda x: (x[1], x[-1], 100 if type(x[-1]) == type('') else x[-2]), reverse=True)
 coding = ['red', 'orange', 'blue']
-categories = ['Username', 'Total Score'] + [f'Problem {i+1}' for i in range(len(stars))] + ['Etgar', 'Admin']
+categories = ['Username', 'Total Score'] + [f'{i+1}' for i in range(len(stars))] + ['Etgar', 'Admin']
 with lc:
     admin = st.checkbox('Show Admins', value=False)
     if not admin:
