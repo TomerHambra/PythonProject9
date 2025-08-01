@@ -106,6 +106,7 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
         with lc:
             k = [st.link_button(f"Problem {totoff + i + 1 + off}", link) for i, (tid, link, md) in enumerate(l2)]
         with mc:
+            print(off, len(l2 ))
             k = [st_star_rating("", 5, stars[i+off], stars_size, read_only=True, dark_theme=True,
                                 key=f's{totoff + i+off}') for i, (tid, link, md) in enumerate(l2)]
         with rc:
