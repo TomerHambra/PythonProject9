@@ -1,6 +1,5 @@
 import streamlit as st
 from pathlib import Path
-import pickle
 import pandas as pd
 import db_handler
 

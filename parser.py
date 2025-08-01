@@ -28,7 +28,7 @@ def get_user_info(user_id):
     }
     request2 = client.post(LOGIN_URL, data={'csrf_token': csrf, 'nick': 'subclient1307', 'pass': 'Toto2000!'}, headers=headers)
     # print(request2.text)
-    url = BASE_URL + user_id
+    url = BASE_URL + str(user_id)
     req = client.get(url)
     soup = BeautifulSoup(req.text, 'lxml')
     result = {}

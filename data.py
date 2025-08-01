@@ -49,5 +49,5 @@ week3ls = [1, 2, 1]
 # Final metadata
 stars = week1s + week2s + week3s + week3ls
 total_cf = ['2029C']
-admins = ['tomer1307', 'yarinys']
+admins = ['tomer1307', 'yarinys', 'markin2000']
 black = ['all', 'omer1308', 'yaser2408']

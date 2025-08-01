@@ -202,6 +202,6 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
 
         db_handler.save_db(di)
 
-    pg = st.navigation([homepage, 'leaderboard.py', 'profile.py'])
+    pg = st.navigation([homepage, 'leaderboard.py', 'profile.py', 'Material.py'])
     pg.run()
 
