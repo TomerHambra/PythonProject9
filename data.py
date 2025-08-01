@@ -32,7 +32,7 @@ week2l = [
 ]
 
 # week 3
-week3s = [0, 0, 1, 1]
+week3s = [0, 0, 1, 1, 1, 2, 1]
 week3u = [
     ['1694s', 'https://cses.fi/problemset/task/1694', 's'],
     ['1696s', 'https://cses.fi/problemset/task/1696', 's'],
@@ -44,10 +44,9 @@ week3l = [
     ['2129s', 'https://cses.fi/problemset/task/2129', 's'],  # bonus - 2 stars
     ['1704s', 'https://cses.fi/problemset/task/1704', 's'],  # bonus - 1 star
 ]
-week3ls = [1, 2, 1]
 
 # Final metadata
-stars = week1s + week2s + week3s + week3ls
+stars = week1s + week2s + week3s
 total_cf = ['2029C']
 admins = ['tomer1307', 'yarinys', 'markin2000']
 black = ['all', 'omer1308', 'yaser2408']
