@@ -159,104 +159,46 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
                 st.stop()
             tasks = reformat_tasks(tasks, cf_tasks)
             st.write("---")
-            st.header("Week One - Introduction to Competitive Programming")
-            st.write("Here is the presentation for this week:")
-            pr = Presentation('presentations/week1.pptx')
-            bo = BytesIO()
-            pr.save(bo)
-            st.download_button(label='Week 1 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-1.pptx', key='cpw11819')
+            st.header("Week One - Intro to CP, STL, Greedy Algorithms and Dynamic Programming")
+            # st.write("Here is the presentation for this week:")
+            # pr = Presentation('presentations/week1.pptx')
+            # bo = BytesIO()
+            # pr.save(bo)
+            # st.download_button(label='Week 1 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-1.pptx', key='cpw11819')
             st.write("""
-                   This week we will be introducing the basics of competitive programming.
-                   Here are some problems to get you started:
+                    Week One – Introduction to Competitive Programming Concepts
+                    This week covers foundational problem-solving strategies using C++ STL,
+                    greedy algorithms, and basic dynamic programming. You'll practice sorting,
+                    prefix sums, greedy interval selection, and subset-sum variations using
+                    classic problems from the CSES Problem Set.
                    """)
             new_off = week(week1u, week1l, week1s, tasks, 0)
 
         with st.container():
             st.write("---")
-            st.header("Week Two - Basic Data Structures")
-            lc, rc = st.columns(2)
-            with lc:
-                st.write("Here is the presentation for this week:")
-                pr = Presentation('presentations/week2-19.pptx') if di['usernames'][st.session_state.get('username')].get('etgar') == '19' \
-                    else Presentation('presentations/week2-18.pptx')
-                bo = BytesIO()
-                pr.save(bo)
-                st.download_button(label='Week 2 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-2.pptx', key='cpw21819')
-            with rc:
-                st.write("Here is the recording from this week (notice that it may be partial during to technical difficulties):")
-                st.page_link('https://drive.google.com/file/d/16UVeVeJU4kw3UeJgp_52zh8SKfWt5oC-/view?usp=sharing',
-                             label='Recording Drive Link', icon='🇬🇬')
+            st.header("Week Two - Graph Algorithms")
+
             st.write("""
-                   This week we attempt to teach you about data structures that are used in c++ and competitive programming.
-                   Here are some problems to get you started:
+                    This week dives into fundamental graph techniques used in contests and real-world
+                    applications. Topics include breadth-first search (BFS), depth-first search (DFS),
+                    topological sorting for DAGs, Dijkstra’s algorithm for shortest paths, and
+                    cycle detection. Problems are selected to build strong intuition for graph traversal.
                    """)
             new_off = week(week2u, week2l, week2s, tasks, new_off)
 
         with st.container():
-            if di['usernames'][st.session_state.get('username')].get('etgar') == '18':
-                st.write("---")
-                st.header("Week Three - Greedy (and Graphs later)")
-                lc, rc = st.columns(2)
-                with lc:
-                    pr = Presentation('presentations/week3-19.pptx')
-                    bo = BytesIO()
-                    pr.save(bo)
-                    st.download_button(label='Week 3 Presentation (greedy)', data=bo.getvalue(),
-                                       file_name='Competitive-Programming-week-3-greedy.pptx', key='cpw311819')
-                    pr2 = Presentation('presentations/week3-18.pptx')
-                    bo2 = BytesIO()
-                    pr2.save(bo2)
-                    st.download_button(label='Week 3 Presentation (graphs)', data=bo2.getvalue(),
-                                       file_name='Competitive-Programming-week-3-graphs.pptx', key='cpw321819')
-                # with rc:pass
-                #     # st.write("Here is the recording from this week (notice that it may be partial during to technical difficulties):")
-                #     # st.page_link('https://drive.google.com/file/d/16UVeVeJU4kw3UeJgp_52zh8SKfWt5oC-/view?usp=sharing',
-                #     #              label='Recording Drive Link', icon='🇬🇬')
-                st.write("""
-                       This week we tried to demonstrate the basics of the greedy approach (which is most of it), and then added the basics of graphs.
-                       """)
-                new_off = week(week3u[1], week3l[1], week3s, tasks, new_off)
-            else:
-                st.write("---")
-                st.header("Week Three - Greedy")
-                lc, rc = st.columns(2)
-                with lc:
-                    st.write("Here is the presentation for this week:")
-                    pr = Presentation('presentations/week3-19.pptx')
-                    bo = BytesIO()
-                    pr.save(bo)
-                    st.download_button(label='Week 3 Presentation (greedy)', data=bo.getvalue(),
-                                       file_name='Competitive-Programming-week-3-greedy.pptx', key='cpw31819')
-
-                # with rc:pass
-                #     # st.write("Here is the recording from this week (notice that it may be partial during to technical difficulties):")
-                #     # st.page_link('https://drive.google.com/file/d/16UVeVeJU4kw3UeJgp_52zh8SKfWt5oC-/view?usp=sharing',
-                #     #              label='Recording Drive Link', icon='🇬🇬')
-                st.write("""
-                       This week we tried to demonstrate the basics of the greedy approach (which is most of it).
-                       """)
-                new_off = week(week3u[0], week3l[0], week3s, tasks, new_off)
-
-        with st.container():
             st.write("---")
-            st.header("Week Four - Dynamic Programming")
-            lc, rc = st.columns(2)
-            with lc:
-                st.write("Here is the presentation for this week:")
-                pr = Presentation('presentations/week4.pptx')
-                bo = BytesIO()
-                pr.save(bo)
-                st.download_button(label='Week 4 Presentation', data=bo.getvalue(), file_name='Competitive-Programming-week-4.pptx', key='cpw41819')
-            with rc:
-                pass
-                # st.write("Here is the recording from this week (notice that it may be partial during to technical difficulties):")
-                # st.page_link('https://drive.google.com/file/d/16UVeVeJU4kw3UeJgp_52zh8SKfWt5oC-/view?usp=sharing',
-                #              label='Recording Drive Link', icon='🇬🇬')
+            st.header("Week Three - Max Flow, Matching, Union Find and SCC")
+
             st.write("""
-                   This week we attempt to teach you about data structures that are used in c++ and competitive programming.
-                   Here are some problems to get you started:
-                   """)
-            new_off = week(week4u, week4l, week4s, tasks, new_off)
+                    This week focuses on advanced graph techniques used in network flow, connectivity,
+                    and component analysis. You'll implement algorithms like Edmonds-Karp for maximum flow,
+                    use Union-Find (Disjoint Set Union) for efficient connectivity queries, and apply
+                    Kosaraju’s or Tarjan’s algorithm to find strongly connected components (SCCs).
+                    These topics are essential for tackling harder graph problems in competitions.
+            """)
+            new_off = week(week2u, week2l, week2s, tasks, new_off)
+
 
         db_handler.save_db(di)
 
