@@ -56,3 +56,19 @@ if st.session_state.get('profcf', 0) == 1:
 
             db_handler.save_db(di)
             st.success('New Info Saved!')
+
+if st.button('Change Username'):
+    st.session_state['profus'] = 1
+if st.session_state.get('profus', 0) == 1:
+    with st.form('usinfo'):
+        us = st.text_input('New Username', key='us')
+        submitted = st.form_submit_button('Submit')
+        if us and submitted:
+            st.session_state['profus'] = 0
+            entr = di['usernames'][st.session_state.get('username')]
+            del di['usernames'][st.session_state.get('username')]
+            di['usernames'][us] = entr
+
+            db_handler.save_db(di)
+            st.success('New Info Saved!')
+
