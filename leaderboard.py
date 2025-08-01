@@ -13,7 +13,7 @@ def update_scores(di, amtofq = len(data.stars)):
         if user in data.black:
             continue
         su = 0
-        l2 = [user, users[user].get('etgar', '20')]
+        l2 = [user]
         for i in range(amtofq):
             su += (stars[i] + 1) * (stars[i] + 1) if users[user].get(f"{i}", 2) == 0 else 0
             l2.append('✅' if users[user].get(f"{i}", 2) == 0 else '❌' if users[user].get(f"{i}", 2) == 1 else '\\-')
@@ -35,7 +35,7 @@ stars = data.stars
 unsorted_list = update_scores(di)
 sorted_list = sorted(unsorted_list, key=lambda x: (x[1], x[-1], 100 if type(x[-1]) == type('') else x[-2]), reverse=True)
 coding = ['red', 'orange', 'blue']
-categories = ['Username', 'Total Score'] + [f'{i+1}' for i in range(len(stars))] + ['Etgar', 'Admin']
+categories = ['Username', 'Total Score'] + [f'{i+1}' for i in range(len(stars))] + ['Admin']
 with lc:
     admin = st.checkbox('Show Admins', value=False)
     if not admin:
@@ -51,14 +51,7 @@ for i, user in enumerate(sorted_list):
 #     df.append([x[i] for x in sorted_list])
 # print(df)
 df = pd.DataFrame.from_records(sorted_list, columns=categories)
-with mc:
-    et18 = st.checkbox('Show etgar 18', value=True)
-    if not et18:
-        df.drop(df[df['Etgar'] == '18'].index, inplace=True)
-with rc:
-    et19 = st.checkbox('Show etgar 19', value=True)
-    if not et19:
-        df.drop(df[df['Etgar'] == '19'].index, inplace=True)
+
 # et20 = st.checkbox('Show etgar 20', value=True)
 # if not et19:
 #     df.drop(df[df['Etgar'] == '20'].index, inplace=True)

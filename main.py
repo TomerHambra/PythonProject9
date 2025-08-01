@@ -60,15 +60,12 @@ elif st.session_state['reg'] == 3:
         cses_handle = st.text_input('CSES Handle (Go to your profile, it\'s the numbers in the URL!)',
                                     key='cses_handle')
         di['usernames'][st.session_state.get('username')]['cses_handle'] = cses_handle
-        etgar_num = st.text_input('What is the number of your ETGAR? (18/19/20)',
-                                    key='etgar')
-        di['usernames'][st.session_state.get('username')]['etgar'] = etgar_num
 
 
         submitted = st.form_submit_button('Submit')
-        if cses_username and cses_handle and submitted and etgar_num:
+        if cses_username and cses_handle and submitted:
             st.session_state['reg'] = 2
-            # db_handler.save_db(di)
+            db_handler.save_db(di)
             st.rerun()
 
 
