@@ -13,13 +13,12 @@ def update_scores(di, amtofq = len(data.stars)):
         if user in data.black:
             continue
         su = 0
-        l2 = [user, 1]
+        l2 = [user, '1']
         for i in range(amtofq):
             su += (stars[i] + 1) * (stars[i] + 1) if users[user].get(f"{i}", 2) == 0 else 0
             l2.append('✅' if users[user].get(f"{i}", 2) == 0 else '❌' if users[user].get(f"{i}", 2) == 1 else '\\-')
-        temp = l2[1]
         l2[1] = su
-        l2 += [temp, user in admins]
+        l2 += [user in admins]
         lis.append(l2)
         users[user]['score'] = su
     return lis
