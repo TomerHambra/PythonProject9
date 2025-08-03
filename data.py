@@ -32,7 +32,7 @@ week2l = [
 ]
 
 # week 3
-week3s = [0, 0, 1, 1, 1, 2, 1]
+week3s = [0, 0, 1, 1, 1, 1]
 week3u = [
     ['1694s', 'https://cses.fi/problemset/task/1694', 's'],
     ['1696s', 'https://cses.fi/problemset/task/1696', 's'],
@@ -41,7 +41,6 @@ week3u = [
 ]
 week3l = [
     ['1711s', 'https://cses.fi/problemset/task/1711', 's'],  # bonus - 1 star
-    ['2129s', 'https://cses.fi/problemset/task/2129', 's'],  # bonus - 2 stars
     ['1704s', 'https://cses.fi/problemset/task/1704', 's'],  # bonus - 1 star
 ]
 
