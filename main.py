@@ -12,6 +12,8 @@ from data import *
 from codeforces_parser import fetch_user
 import db_handler
 
+
+
 st.set_page_config(page_title="Competitive Programming At University of Haifa", page_icon=":shark:", layout="wide")
 
 
@@ -124,7 +126,6 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
         st.subheader(f'So far you have completed {su}/{len(p)} problems this week!')
     return totoff + len(stars)
 
-
 def reformat_tasks(tasks, cf):
     new_tasks = {}
     for key, value in tasks.items():
@@ -133,6 +134,20 @@ def reformat_tasks(tasks, cf):
         new_tasks[str(key)+'f'] = value
     return new_tasks
 
+
+
+
+
+def return_parsing():
+    cses_handle = di['usernames'][st.session_state.get('username')].get('cses_handle')
+    # print(cses_handle)
+    tasks = parser.get_user_info(cses_handle)
+    cf_tasks = fetch_user(total_cf, di['usernames'][st.session_state.get('username')].get('cf_handle'))
+    if cf_tasks == -1:
+        st.warning('Please Fill in your Codeforces Information in the Profile Section!')
+        st.stop()
+    tasks = reformat_tasks(tasks, cf_tasks)
+    return tasks, cses_handle
 
 if st.session_state.get('authentication_status') and st.session_state.get('reg') == 2:
     with st.container():
@@ -148,14 +163,7 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
         with st.container():
             if not st.session_state.get('authentication_status'):
                 st.rerun()
-            cses_handle = di['usernames'][st.session_state.get('username')].get('cses_handle')
-            # print(cses_handle)
-            tasks = parser.get_user_info(cses_handle)
-            cf_tasks = fetch_user(total_cf, di['usernames'][st.session_state.get('username')].get('cf_handle'))
-            if cf_tasks == -1:
-                st.warning('Please Fill in your Codeforces Information in the Profile Section!')
-                st.stop()
-            tasks = reformat_tasks(tasks, cf_tasks)
+            tasks, cses_handle = return_parsing()
             st.write("---")
             st.header("Week One - Intro to CP, STL, Greedy Algorithms and Dynamic Programming")
             # st.write("Here is the presentation for this week:")

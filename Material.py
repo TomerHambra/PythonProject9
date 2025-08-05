@@ -103,7 +103,7 @@ namespace SCCKosaraju {
 st.code(code, language='cpp', line_numbers=True)
 st.subheader('''Description: 
 The regular Union Find from class.
-Time: $O(\\alpha (n)$ for both operations. 
+Time: $O(\\alpha (n))$ for both operations. 
 Run pre() before usage.''')
 
 code = """
@@ -122,5 +122,4 @@ int onion(int a, int b) {
 
 """
 st.code(code, language='cpp', line_numbers=True)
-
 
