@@ -81,12 +81,12 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
     lc, mc, rc = st.columns(3)
     stars_size = 20
     with lc:
-        k = [st.link_button(f"Problem {totoff + i + 1}", link) for i, (tid, link, md) in enumerate(l)]
+        k = [st.link_button(f"Problem {totoff + i + 1}", _[1]) for i, _ in enumerate(l)]
         st.text('Finish these problems to unlock more challenging ones!')
         # print(tasks)
     with mc:
         k = [st_star_rating("", 5, stars[i], stars_size, read_only=True,
-                            dark_theme=True, key=f's{totoff+i}') for i, (tid, link, md) in enumerate(l)]
+                            dark_theme=True, key=f's{totoff+i}') for i, _ in enumerate(l)]
     with rc:
         st.write('Here you can see the status of your problems:')
         k = [st.badge(f'Problem {totoff + i + 1}', icon=":material/check:", color="green") if tasks.get(tid, Status.NAT) == Status.AC
@@ -103,11 +103,11 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
         lc, mc, rc = st.columns(3)
         off = len(l)
         with lc:
-            k = [st.link_button(f"Problem {totoff + i + 1 + off}", link) for i, (tid, link, md) in enumerate(l2)]
+            k = [st.link_button(f"Problem {totoff + i + 1 + off}", _[1]) for i, _ in enumerate(l2)]
         with mc:
-            print(off, len(l2 ))
+            print(off, len(l2))
             k = [st_star_rating("", 5, stars[i+off], stars_size, read_only=True, dark_theme=True,
-                                key=f's{totoff + i+off}') for i, (tid, link, md) in enumerate(l2)]
+                                key=f's{totoff + i+off}') for i, _ in enumerate(l2)]
         with rc:
             # st.write('Here you can mark the problems you have completed (they will be saved on your next visit):')
             k2 = [st.badge(f'Problem {totoff + i + off + 1}', icon=":material/check:", color="green") if tasks.get(tid, Status.NAT) == Status.AC
@@ -154,7 +154,7 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
         authenticator.logout('Logout', 'sidebar')
 
 
-    def homepage():
+    def Homepage():
         with st.container():
             st.title("Competitive Programming At University of Haifa")
             st.write("Welcome to the Competitive Programming At University of Haifa website!")
@@ -208,6 +208,6 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
 
         db_handler.save_db(di)
 
-    pg = st.navigation([homepage, 'leaderboard.py', 'profile.py', 'Material.py'])
+    pg = st.navigation([Homepage, 'Leaderboard.py', 'Profile.py', 'Material.py'])
     pg.run()
 
