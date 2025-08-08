@@ -60,7 +60,7 @@ tasks, cses_handle = return_parsing()
 stars = data.stars
 tot = data.total_prob
 for i, prob in enumerate(tot):
-    di['usernames'][st.session_state.get('username')][str(i)] = tasks[prob[0]]
+    di['usernames'][st.session_state.get('username')][str(i)] = tasks.get(prob[0], 2)
 
 unsorted_list = update_scores(di)
 sorted_list = sorted(unsorted_list, key=lambda x: (x[1], x[-1], 100 if type(x[-1]) == type('') else x[-2]), reverse=True)

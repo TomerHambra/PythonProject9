@@ -206,6 +206,19 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
             new_off = week(week3u, week3l, week3s, tasks, new_off)
 
 
+        with st.container():
+            st.write("---")
+            st.header("Week Four – Segment Trees, Fenwick Trees, and Range Queries")
+
+            st.write(""" 
+                    This week explores advanced data structures for efficient range queries and updates.
+                    You will implement segment trees and Fenwick trees (Binary Indexed Trees), handle
+                    point and range updates, and solve problems involving prefix sums, order statistics,
+                    and dynamic data manipulation. These skills are key for optimizing solutions
+                    to meet strict time constraints in competitive programming.
+            """)
+            new_off = week(week4u, week4l, week4s, tasks, new_off)
+
         db_handler.save_db(di)
 
     pg = st.navigation([Homepage, 'Leaderboard.py', 'Profile.py', 'Material.py'])
