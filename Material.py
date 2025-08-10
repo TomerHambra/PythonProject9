@@ -63,8 +63,8 @@ struct Dinic {
 
 """
 st.code(code, language='cpp', line_numbers=True)
-st.subheader('''Description: 
-Finds strongly connected components of a directed graph. Visits/indexes SCCs in topological order. 
+st.subheader('''SCC.h
+Description: Finds strongly connected components of a directed graph. Visits/indexes SCCs in topological order. 
 Time: $O(|V| + |E|)$ Usage: scc(graph) returns an array that has the ID of each node's SCC.''')
 
 code = """
@@ -101,8 +101,8 @@ namespace SCCKosaraju {
 
 """
 st.code(code, language='cpp', line_numbers=True)
-st.subheader('''Description: 
-The regular Union Find from class.
+st.subheader('''UnionFind.h
+Description: The regular Union Find from class.
 Time: $O(\\alpha (n))$ for both operations. 
 Run pre() before usage.''')
 
@@ -123,3 +123,117 @@ int onion(int a, int b) {
 """
 st.code(code, language='cpp', line_numbers=True)
 
+
+st.subheader('''MinCostMaxFlow.h
+Description: Min-cost max-flow. cap[i][j] != cap[j][i] is allowed; double edges are not.
+If costs can be negative, call setpi before maxflow, but note that negative cost cycles are not supported.
+To obtain the actual flow, look at positive values only.
+Time: Approximately $O(E^2)$''')
+
+code = """
+#include <ext/pd_ds.h/priority_queue.hpp> // remove if not working...
+const ll INF = numeric_limits<ll>::max() / 4;
+struct MCMF {
+  struct edge { int from, to, rev; ll cap, cost, flow; };
+  int N;
+  vector<vector<edge>> ed;
+  vi seen;
+  vector<ll> dist, pi;
+  vector<edge*> par;
+  MCMF(int N): N(N), ed(N), seen(N), dist(N), pi(N), par(N) {}
+  void addEdge(int from, int to, ll cap, ll cost) {
+    if (from == to) return;
+    ed[from].push_back(edge{from, to, sz(ed[to]), cap, cost,
+                            0});
+    ed[to].push_back(edge{to, from, sz(ed[from]) - 1, 0,
+                          -cost, 0}); }
+  void path(int s) {
+    fill(all(seen), 0);
+    fill(all(dist), INF);
+    dist[s] = 0;
+    ll di;
+    __gnu_pbds::priority_queue<pair<ll, int>> q;
+    vector<decltype(q)::point_iterator> its(N);
+    q.push({0, s});
+    while (!q.empty()) {
+      s = q.top().second;
+      q.pop();
+      seen[s] = 1;
+      di = dist[s] + pi[s];
+      for (edge& e : ed[s]) if (!seen[e.to]) {
+        ll val = di - pi[e.to] + e.cost;
+        if (e.cap - e.flow > 0 && val < dist[e.to]) {
+          dist[e.to] = val;
+          par[e.to] = &e;
+          if (its[e.to] == q.end())
+            its[e.to] = q.push({-dist[e.to], e.to});
+          else q.modify(its[e.to], {-dist[e.to], e.to}); } } }
+    rep (i, 0, N) pi[i] = min(pi[i] + dist[i], INF); }
+  pair<ll, ll> maxflow(int s, int t) {
+    ll totflow = 0, totcost = 0;
+    while (path(s), seen[t]) {
+      ll fl = INF;
+      for (edge* x = par[t]; x; x = par[x->from])
+        fl = min(fl, x->cap - x->flow);
+      totflow += fl;
+      for (edge* x = par[t]; x; x = par[x->from]) {
+        x->flow += fl;
+        ed[x->to][x->rev].flow -= fl; } }
+    rep (i, 0, N) for (edge& e : ed[i])
+      totcost += e.cost * e.flow;
+    return {totflow, totcost / 2}; }
+  // If some costs can be negative, call this before maxflow:
+  void setpi(int s) { // (otherwise, leave this out)
+    fill(all(pi), INF);
+    pi[s] = 0;
+    int it = N, ch = 1;
+    ll v;
+    while (ch-- && it--) rep (i, 0, N) if (pi[i] != INF)
+      for (edge& e : ed[i]) if (e.cap)
+        if ((v = pi[i] + e.cost) < pi[e.to])
+          pi[e.to] = v, ch = 1;
+    assert(it >= 0); // negative cost cycle
+  } };
+
+"""
+st.code(code, language='cpp', line_numbers=True)
+
+
+st.subheader('''Hungarian
+Description: Given a weighted bipartite graph, matches every node on
+the left with a node on the right such that no
+nodes are in two matchings and the sum of the edge weights is minimal. Takes
+cost[N][M], where cost[i][j] = cost for L[i] to be matched with R[j] and
+returns (min cost, match), where L[i] is matched with
+R[match[i]]. Negate costs for max cost. Requires $N \\le M$.
+Time: $O(N^2\\cdot M)$''')
+
+code = """
+pair<int, vi> hungarian(const vector<vi>& a) {
+  if (a.empty()) return {0, {}};
+  int n = sz(a) + 1, m = sz(a[0]) + 1;
+  vi u(n), v(m), p(m), ans(n - 1);
+  rep (i, 1, n) {
+    p[0] = i;
+    int j0 = 0; // add "dummy" worker 0
+    vi dist(m, INT_MAX), pre(m, -1);
+    vector<bool> done(m + 1);
+    do { // dijkstra
+      done[j0] = true;
+      int i0 = p[j0], j1, delta = INT_MAX;
+      rep (j, 1, m) if (!done[j]) {
+        auto cur = a[i0 - 1][j - 1] - u[i0] - v[j];
+        if (cur < dist[j]) dist[j] = cur, pre[j] = j0;
+        if (dist[j] < delta) delta = dist[j], j1 = j; }
+      rep (j, 0, m) {
+        if (done[j]) u[p[j]] += delta, v[j] -= delta;
+        else dist[j] -= delta; }
+      j0 = j1; } while (p[j0]);
+    while (j0) { // update alternating path
+      int j1 = pre[j0];
+      p[j0] = p[j1], j0 = j1; } }
+  rep (j, 1, m) if (p[j]) ans[p[j] - 1] = j - 1;
+  return {-v[0], ans}; // min cost
+}
+"""
+st.code(code, language='cpp', line_numbers=True)
