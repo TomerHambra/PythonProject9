@@ -146,6 +146,9 @@ def return_parsing():
     if cf_tasks == -1:
         st.warning('Please Fill in your Codeforces Information in the Profile Section!')
         st.stop()
+    elif cf_tasks == -2:
+        st.warning("Codeforces is down! can still use my website though B)")
+        cf_tasks = {}
     tasks = reformat_tasks(tasks, cf_tasks)
     return tasks, cses_handle
 

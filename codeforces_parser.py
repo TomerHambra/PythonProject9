@@ -11,10 +11,10 @@ def fetch_user(list_of_ids, handle):
     client = requests.session()
     response = client.get(http_req)
     if not response:
-        return -1
+        return -2
     response_json = json.loads(response.text)
     if response_json['status'] != 'OK':
-        return -1
+        return -3
     results = reversed(response_json['result'])
 
     condensed = {}
