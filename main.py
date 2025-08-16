@@ -29,7 +29,7 @@ if st.session_state['reg'] == 1:
         if st.button("Register"):
             st.session_state['reg'] = 0
             st.rerun()
-        authenticator.login('main', clear_on_submit=False)
+        authenticator.login('main', clear_on_submit=True)
         if st.session_state['authentication_status']:
             st.session_state['reg'] = 2
             st.rerun()
