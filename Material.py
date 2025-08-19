@@ -278,7 +278,7 @@ with t[5]:
     struct segment_tree_arr{
         int n;
         vi value;
-        segment_tree_arr(int n): value(4*n, 0){
+        segment_tree_arr(int n): value(4*n, 0), n(n){
             build(1, 1, n);
         }
     
@@ -324,7 +324,7 @@ with t[6]:
     struct lazy_segment_tree_arr{
         int n;
         vi value, lazy;
-        lazy_segment_tree_arr(int n): value(4*n, 0), lazy(4*n, 0){
+        lazy_segment_tree_arr(int n): value(4*n, 0), lazy(4*n, 0), n(n){
             build(1, 1, n);
         }
     
