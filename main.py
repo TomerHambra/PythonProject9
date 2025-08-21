@@ -222,6 +222,20 @@ if st.session_state.get('authentication_status') and st.session_state.get('reg')
             """)
             new_off = week(week4u, week4l, week4s, tasks, new_off)
 
+        with st.container():
+            st.write("---")
+            st.header("Week Five – Binary Lifting, Euler Tour and Math")
+
+            st.write(""" 
+                    This week explores fundamental tree algorithms and number theory techniques.
+                    Topics include computing tree diameters, subtree queries, and handling ancestor
+                    queries efficiently with Lowest Common Ancestor (LCA). On the math side, you’ll
+                    practice modular exponentiation and its extensions for solving power-related problems.
+                    Locked challenges introduce more advanced applications such as dynamic parent queries
+                    and bracket sequence analysis.
+            """)
+            new_off = week(week5u, week5l, week5s, tasks, new_off)
+
         db_handler.save_db(di)
 
     pg = st.navigation([Homepage, 'Leaderboard.py', 'Profile.py', 'Material.py'])

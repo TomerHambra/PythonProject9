@@ -60,9 +60,23 @@ week4l = [
     ['2206s', 'https://cses.fi/problemset/task/2206', 's'],  # locked/bonus – 3 stars
 ]
 
+week5s = [0, 2, 1, 1, 0, 1, 1, 1]
+week5u = [
+    ['1131s', 'https://cses.fi/problemset/task/1131', 's'],  # Tree Diameter
+    ['1133s', 'https://cses.fi/problemset/task/1133', 's'],  # Tree Distances II
+    ['1687s', 'https://cses.fi/problemset/task/1687', 's'],  # Company Queries I
+    ['1137s', 'https://cses.fi/problemset/task/1137', 's'],  # Subtree Queries
+    ['1095s', 'https://cses.fi/problemset/task/1095', 's'],  # Exponentiation
+    ['1712s', 'https://cses.fi/problemset/task/1712', 's'],  # Exponentiation II
+]
+week5l = [
+    ['2064s', 'https://cses.fi/problemset/task/2064', 's'],  # Bracket Sequences I (locked)
+    ['1688s', 'https://cses.fi/problemset/task/1688', 's'],  # Company Queries II (locked)
+]
+
 # Final metadata
-stars = week1s + week2s + week3s + week4s
-total_prob = week1u + week1l + week2u + week2l + week3u + week3l + week4u + week4l
+stars = week1s + week2s + week3s + week4s + week5s
+total_prob = week1u + week1l + week2u + week2l + week3u + week3l + week4u + week4l + week5u + week5l
 total_cf = ['2029C']
-admins = ['tomer1307', 'yarinys', 'markin2000']
+admins = ['tomer1307', 'yarinys']
 black = ['all', 'omer1308', 'yaser2408']
