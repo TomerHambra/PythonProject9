@@ -355,6 +355,7 @@ with t[6]:
             } int m = (l+r)/2;
             pushdown(node, l, m, r);
             _update(2*node, ql, qr, k, l, m), _update(2*node+1, ql, qr, k, m+1, r);
+            pullup(node);
         }
         inline int query(int l, int r) { return _query(1, l, r, 1, n); }
         int _query(int node, int ql, int qr, int l, int r){
