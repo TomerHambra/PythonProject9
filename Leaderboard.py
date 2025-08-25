@@ -9,6 +9,7 @@ from data import *
 
 def reformat_tasks(tasks, cf):
     new_tasks = {}
+    cf = cf if isinstance(cf, dict) else {}
     for key, value in tasks.items():
         new_tasks[str(key)+'s'] = value
     for key, value in cf.items():

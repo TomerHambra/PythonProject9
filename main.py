@@ -126,16 +126,15 @@ def week(list_of_questions, list_of_locked, stars, tasks, totoff):
         st.subheader(f'So far you have completed {su}/{len(p)} problems this week!')
     return totoff + len(stars)
 
+
 def reformat_tasks(tasks, cf):
     new_tasks = {}
+    cf = cf if isinstance(cf, dict) else {}
     for key, value in tasks.items():
         new_tasks[str(key)+'s'] = value
     for key, value in cf.items():
         new_tasks[str(key)+'f'] = value
     return new_tasks
-
-
-
 
 
 def return_parsing():
@@ -151,6 +150,7 @@ def return_parsing():
         cf_tasks = {}
     tasks = reformat_tasks(tasks, cf_tasks)
     return tasks, cses_handle
+
 
 if st.session_state.get('authentication_status') and st.session_state.get('reg') == 2:
     with st.container():
