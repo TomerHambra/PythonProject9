@@ -12,7 +12,7 @@ st.title("Our Notebook (Partially)")
 st.header("Here you will find the algorithm implementations for things we believe you need.")
 
 t = st.tabs(["Dinic", "SCC", "Union Find", "MCMF", "Hungarian", "Seg Tree", "Lazy Seg Tree", "Fenwick",
-             "Binary Lifting",
+             "Binary Lifting"
              ])
 
 with t[0]:
@@ -21,7 +21,7 @@ with t[0]:
     
     Time Complexity: $O(\\mathrm{min}(E^{\\frac{1}{2}}, V^{\\frac{2}{3}})E)$   if $U = 1$.
     
-    $O(√V E)$ for bipartite matching.""")
+    $O(\\sqrt V E)$ for bipartite matching.""")
 
 
     code = """
@@ -418,7 +418,7 @@ with t[8]:
     
     Assumes the root node points to itself.
     
-    Time: construction $O(N)$, queries $O(\log N)$''')
+    Time: construction $O(N)$, queries $O(\\log N)$''')
 
     code = """
 
